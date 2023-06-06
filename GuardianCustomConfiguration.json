@@ -1,9 +1,38 @@
 {
-    "Enabled": false,
+    "Enabled": true,
     "Tools": {
+        "BinSkim": {
+            "Enabled": true,
+            "Inputs": {
+                "AnalyzeTargetGlob": "$(Build.SourcesDirectory)\\vnext\\target\\**\\Microsoft.ReactNative.dll;$(Build.SourcesDirectory)\\vnext\\target\\**\\React.Windows.Desktop.DLL\\*.dll",
+                "AnalyzeSymPath": "$(Build.SourcesDirectory)\\vnext\\target\\**\\Microsoft.ReactNative.pdb;$(Build.SourcesDirectory)\\vnext\\target\\**\\React.Windows.Desktop.DLL\\*.pdb"
+            }
+        },
         "CredScan": {
+            "Enabled": true,
             "Inputs": {
                 "suppressionsFile": "$(Build.SourcesDirectory)/.ado/config/CredScanSuppressions.json"
+            }
+        },
+        "ESLint": {
+            "Enabled": true,
+            "Inputs": {
+                "Configuration": "required",
+                "Parser": "@babel/eslint-parser",
+                "ParserOptions": "sourceType:module",
+                "CustomEnvironments": true,
+                "EnvironmentsNode": true,
+                "EnvironmentsCommonJs": true,
+                "EnvironmentsEs6": true
+            }
+        },
+        "PSScriptAnalyzer": {
+            "Enabled": true
+        },
+        "Roslyn": {
+            "Enabled": true,
+            "Inputs": {
+                "CopyLogsOnly": false
             }
         }
     }
