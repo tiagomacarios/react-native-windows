@@ -1,7 +1,7 @@
 steps:
   - powershell: |
-      $certStoreRoot = "cert:\CurrentUser\My"
-      $rootFolder = $(Build.SourcesDirectory)
+      $certStoreRoot="cert:\CurrentUser\My"
+      $rootFolder="$(Build.SourcesDirectory)"
       [System.Security.SecureString] $password = ConvertTo-SecureString -String "pwd" -Force -AsPlainText
 
       $cert = New-SelfSignedCertificate -KeyExportPolicy Exportable -CertStoreLocation $certStoreRoot -DnsName "Development Root CA" -NotAfter (Get-Date).AddYears(5) -Type CodeSigningCert -KeyUsage DigitalSignature
