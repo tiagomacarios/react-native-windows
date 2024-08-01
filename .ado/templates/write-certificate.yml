@@ -1,6 +1,7 @@
 parameters:
   - name: certificatePassword
     type: string
+    default: 'pwd'
 
 steps:
   - powershell: |
