@@ -1,11 +1,14 @@
+parameters:
+  - name: certificatePassword
+    type: string
+
 steps:
   - powershell: |
       $certStoreRoot="cert:\CurrentUser\My"
       $rootFolder="$(Build.SourcesDirectory)"
 
       # the following two lines must match
-      [System.Security.SecureString] $password = ConvertTo-SecureString -String "pwd" -Force -AsPlainText
-      Write-Host "##vso[task.setvariable variable=PackageCertificatePassword;issecret=true]pwd"
+      [System.Security.SecureString] $password = ConvertTo-SecureString -String "${{ parameters.certificatePassword }}" -Force -AsPlainText
 
       $cert = New-SelfSignedCertificate -KeyExportPolicy Exportable -CertStoreLocation $certStoreRoot -DnsName "Development Root CA" -NotAfter (Get-Date).AddYears(5) -Type CodeSigningCert -KeyUsage DigitalSignature
       [String] $pfxPath = [System.IO.Path]::GetFullPath( (Join-Path -Path $rootFolder -ChildPath EncodedKey.pfx) )
